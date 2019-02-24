@@ -61,29 +61,31 @@ public class Main {
     }
 
     public static void quickSort(int[] arr){
-        int elem = arr[(int)(arr.length / 2)];
-        int i = 0, j = arr.length-1;
-        while (j > i) {
-            while ((arr[i] < elem || arr[i] == arr[j]) &&  i < j) {
-                i++;
+        if (arr.length > 1) {
+            int elem = arr[(int)(arr.length / 2)];
+            int i = 0, j = arr.length-1;
+            while (j > i) {
+                while ((arr[i] < elem || arr[i] == arr[j]) &&  i < j) {
+                    i++;
+                }
+                while (arr[j] > elem && j > i) {
+                    j--;
+                }
+                int x = arr[i];
+                arr[i] = arr[j];
+                arr[j] = x;
             }
-            while (arr[j] > elem && j > i) {
-                j--;
-            }
-            int x = arr[i];
-            arr[i] = arr[j];
-            arr[j] = x;
-        }
-        if (arr.length > 2) {
-            int[] first = Arrays.copyOfRange(arr, 0, i);
-            int[] second = Arrays.copyOfRange(arr, i, arr.length);
-            quickSort(first);
-            quickSort(second);
-            for (int k = 0; k < first.length; k++){
-                arr[k] = first[k];
-            }
-            for (int k = 0; k < second.length; k++){
-                arr[k+first.length] = second[k];
+            if (arr.length > 2) {
+                int[] first = Arrays.copyOfRange(arr, 0, i);
+                int[] second = Arrays.copyOfRange(arr, i, arr.length);
+                quickSort(first);
+                quickSort(second);
+                for (int k = 0; k < first.length; k++){
+                    arr[k] = first[k];
+                }
+                for (int k = 0; k < second.length; k++){
+                    arr[k+first.length] = second[k];
+                }
             }
         }
     }
